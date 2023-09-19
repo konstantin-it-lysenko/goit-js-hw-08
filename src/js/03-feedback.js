@@ -4,11 +4,11 @@ const formEl = document.querySelector('.feedback-form');
 const LS_FORM_STATE = 'feedback-form-state';
 let formData = {};
 
-populateForm();
 formEl.addEventListener('input', throttle(handleFormInput, 500));
 formEl.addEventListener('submit', handleFormSubmit);
 
 function handleFormInput(event) {
+    console.log(event.target);
     formData[event.target.name] = event.target.value;
 
     const jsonFormData = JSON.stringify(formData);
@@ -27,6 +27,7 @@ function handleFormSubmit(event) {
     console.log(formData);
 
     localStorage.removeItem(LS_FORM_STATE);
+    formData = {};
     event.currentTarget.reset();
 }
 
@@ -41,3 +42,5 @@ function populateForm() {
         }
     }
 }
+
+populateForm();
